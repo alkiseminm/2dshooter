@@ -13,18 +13,26 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;     // Reference to the Rigidbody2D component
     private Vector2 movement;   // Movement input vector
 
+    // Reference to the stamina system.
+    private StaminaSystem staminaSystem;
+
     // Called when the script instance is being loaded.
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+
+        // Get the StaminaSystem component (make sure it's attached on the same GameObject).
+        staminaSystem = GetComponent<StaminaSystem>();
+        if (staminaSystem == null)
+        {
+            Debug.LogError("StaminaSystem component not found on the GameObject!");
+        }
     }
 
     // Called once per frame for handling input and updating the player's state.
     void Update()
     {
-        
-        
         // Read movement input from the keyboard (Horizontal and Vertical axes).
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
@@ -32,15 +40,15 @@ public class PlayerController : MonoBehaviour
         // Normalize the movement vector to maintain consistent speed in all directions.
         movement = movement.normalized;
 
-        // Update the player's state based on input:
+        // Update the player's state based on input and stamina:
         // - Standing if no movement input is provided.
-        // - Sprinting if moving and left shift is held.
-        // - Walking if moving and left shift is not held.
+        // - Sprinting if moving, left shift is held, and there is stamina available.
+        // - Walking otherwise.
         if (movement == Vector2.zero)
         {
             currentState = PlayerState.Standing;
         }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.LeftShift) && staminaSystem != null && staminaSystem.currentStamina > 0)
         {
             currentState = PlayerState.Sprinting;
         }
@@ -53,9 +61,9 @@ public class PlayerController : MonoBehaviour
     // Called at fixed intervals (useful for physics updates).
     void FixedUpdate()
     {
-        // Set the current speed based on whether the player is sprinting.
+        // Use the current state to determine speed.
         float currentSpeed = moveSpeed;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (currentState == PlayerState.Sprinting)
         {
             currentSpeed *= sprintMultiplier;
         }
