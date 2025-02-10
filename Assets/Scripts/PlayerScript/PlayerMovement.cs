@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     // Called once per frame for handling input and updating the player's state.
     void Update()
     {
+        Debug.Log(currentState);
+        
         // Read movement input from the keyboard (Horizontal and Vertical axes).
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");

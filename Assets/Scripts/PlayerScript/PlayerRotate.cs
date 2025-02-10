@@ -2,22 +2,66 @@ using UnityEngine;
 
 public class RotateToMouse : MonoBehaviour
 {
+    // Define the rotation states.
+    public enum RotationState { Aiming, NotAiming }
+    public RotationState currentState;
+
+    // Minimum movement (in world units) required to update rotation based on movement.
+    public float minMovementThreshold = 0.01f;
+
+    // Store the player's position from the last frame.
+    private Vector3 lastPosition;
+
+    void Start()
+    {
+        // Initialize lastPosition to the player's starting position.
+        lastPosition = transform.position;
+        currentState = RotationState.NotAiming;
+    }
+
     void Update()
     {
-        // Get the current mouse position
-        Vector3 mousePos = Input.mousePosition;
-        // Set the z coordinate to the distance between the camera and the player.
-        // (Assuming your camera is behind the player along the z-axis)
-        mousePos.z = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
+        //Debug.Log(currentState);
+        
+        // Check if the right mouse button is held down.
+        if (Input.GetMouseButton(1))
+        {
+            currentState = RotationState.Aiming;
 
-        // Convert the adjusted mouse position to world space
-        Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
+            // Get the current mouse position in screen space.
+            Vector3 mousePos = Input.mousePosition;
+            // Adjust the z coordinate so that the ScreenToWorldPoint conversion works correctly.
+            mousePos.z = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
 
-        // Calculate the direction vector from the player to the mouse position
-        Vector2 direction = new Vector2(worldMousePos.x - transform.position.x,
-                                        worldMousePos.y - transform.position.y);
+            // Convert the screen position to world space.
+            Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-        // Rotate the player so that its "up" vector points toward the mouse position
-        transform.up = direction;
+            // Calculate the direction from the player to the mouse cursor.
+            Vector2 directionToMouse = new Vector2(
+                worldMousePos.x - transform.position.x,
+                worldMousePos.y - transform.position.y);
+
+            // Rotate the player if the direction is significant.
+            if (directionToMouse.sqrMagnitude > 0.001f)
+            {
+                transform.up = directionToMouse;
+            }
+        }
+        else
+        {
+            currentState = RotationState.NotAiming;
+
+            // Calculate the movement vector by comparing current and previous positions.
+            Vector2 movement = transform.position - lastPosition;
+
+            // Rotate the player based on movement if the movement exceeds the threshold.
+            if (movement.magnitude > minMovementThreshold)
+            {
+                transform.up = movement;
+            }
+        }
+
+        // Update lastPosition for the next frame.
+        lastPosition = transform.position;
     }
 }

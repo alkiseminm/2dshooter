@@ -28,7 +28,7 @@ public class StaminaSystem : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(currentStamina);
+        //Debug.Log(currentStamina);
         
         // Only run stamina logic if we successfully found the PlayerController.
         if (playerController != null)
