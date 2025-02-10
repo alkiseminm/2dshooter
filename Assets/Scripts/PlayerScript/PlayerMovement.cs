@@ -2,27 +2,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Define the possible player states.
     public enum PlayerState { Standing, Walking, Sprinting }
     public PlayerState currentState;
 
     [Header("Movement Settings")]
-    public float moveSpeed = 5f;            // Base speed at which the player moves
-    public float sprintMultiplier = 1.5f;   // Speed multiplier when sprinting
+    public float moveSpeed = 5f;
+    public float sprintMultiplier = 1.5f;
 
-    private Rigidbody2D rb;     // Reference to the Rigidbody2D component
-    private Vector2 movement;   // Movement input vector
+    private Rigidbody2D rb;
+    private Vector2 movement; // Raw player input (doesn't include knockback)
 
     // Reference to the stamina system.
     private StaminaSystem staminaSystem;
 
-    // Called when the script instance is being loaded.
+    [Header("Knockback Settings")]
+    private Vector2 knockbackVelocity = Vector2.zero;
+    [SerializeField] private float knockbackDecay = 5f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
+        rb.freezeRotation = true;
 
-        // Get the StaminaSystem component (make sure it's attached on the same GameObject).
         staminaSystem = GetComponent<StaminaSystem>();
         if (staminaSystem == null)
         {
@@ -30,22 +32,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Called once per frame for handling input and updating the player's state.
     void Update()
     {
-        Debug.Log(currentState);
-        
         // Read movement input from the keyboard (Horizontal and Vertical axes).
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
 
-        // Normalize the movement vector to maintain consistent speed in all directions.
+        // Normalize input to maintain consistent speed in all directions.
         movement = movement.normalized;
 
-        // Update the player's state based on input and stamina:
-        // - Standing if no movement input is provided.
-        // - Sprinting if moving, left shift is held, and there is stamina available.
-        // - Walking otherwise.
+        // Update the player's state based on input and stamina.
         if (movement == Vector2.zero)
         {
             currentState = PlayerState.Standing;
@@ -60,17 +56,37 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Called at fixed intervals (useful for physics updates).
     void FixedUpdate()
     {
-        // Use the current state to determine speed.
         float currentSpeed = moveSpeed;
         if (currentState == PlayerState.Sprinting)
         {
             currentSpeed *= sprintMultiplier;
         }
 
-        // Move the player by updating the Rigidbody2D's position.
-        rb.MovePosition(rb.position + movement * currentSpeed * Time.fixedDeltaTime);
+        // Player's intentional movement velocity (without knockback).
+        Vector2 inputVelocity = movement * currentSpeed;
+
+        // Apply both movement and knockback.
+        rb.linearVelocity = inputVelocity + knockbackVelocity;
+
+        // Gradually decay the knockback effect.
+        knockbackVelocity = Vector2.Lerp(knockbackVelocity, Vector2.zero, knockbackDecay * Time.fixedDeltaTime);
+    }
+
+    /// <summary>
+    /// Adds knockback to the player by setting the knockback velocity.
+    /// </summary>
+    public void AddKnockback(Vector2 knockback)
+    {
+        knockbackVelocity = knockback;
+    }
+
+    /// <summary>
+    /// Expose raw player input movement (used by RotateToMouse for correct rotation).
+    /// </summary>
+    public Vector2 InputMovement
+    {
+        get { return movement; }
     }
 }

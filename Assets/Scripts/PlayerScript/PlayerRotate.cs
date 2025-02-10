@@ -2,46 +2,41 @@ using UnityEngine;
 
 public class RotateToMouse : MonoBehaviour
 {
-    // Define the rotation states.
     public enum RotationState { Aiming, NotAiming }
     public RotationState currentState;
 
-    // Minimum movement (in world units) required to update rotation based on movement.
+    // Minimum movement (in world units) required to update rotation.
     public float minMovementThreshold = 0.01f;
 
-    // Store the player's position from the last frame.
-    private Vector3 lastPosition;
+    // Reference to the player's PlayerController to access the input movement.
+    private PlayerController playerController;
 
     void Start()
     {
-        // Initialize lastPosition to the player's starting position.
-        lastPosition = transform.position;
         currentState = RotationState.NotAiming;
+        playerController = GetComponent<PlayerController>();
+        if (playerController == null)
+        {
+            Debug.LogError("PlayerController component not found on " + gameObject.name);
+        }
     }
 
     void Update()
     {
-        //Debug.Log(currentState);
-        
-        // Check if the right mouse button is held down.
         if (Input.GetMouseButton(1))
         {
             currentState = RotationState.Aiming;
 
-            // Get the current mouse position in screen space.
+            // Get mouse position and convert to world coordinates.
             Vector3 mousePos = Input.mousePosition;
-            // Adjust the z coordinate so that the ScreenToWorldPoint conversion works correctly.
             mousePos.z = Mathf.Abs(Camera.main.transform.position.z - transform.position.z);
-
-            // Convert the screen position to world space.
             Vector3 worldMousePos = Camera.main.ScreenToWorldPoint(mousePos);
 
-            // Calculate the direction from the player to the mouse cursor.
+            // Calculate the direction from the player to the mouse.
             Vector2 directionToMouse = new Vector2(
                 worldMousePos.x - transform.position.x,
                 worldMousePos.y - transform.position.y);
 
-            // Rotate the player if the direction is significant.
             if (directionToMouse.sqrMagnitude > 0.001f)
             {
                 transform.up = directionToMouse;
@@ -51,17 +46,15 @@ public class RotateToMouse : MonoBehaviour
         {
             currentState = RotationState.NotAiming;
 
-            // Calculate the movement vector by comparing current and previous positions.
-            Vector2 movement = transform.position - lastPosition;
+            // Use the input movement from the PlayerController (ignoring knockback).
+            Vector2 inputMovement = playerController.InputMovement;
 
-            // Rotate the player based on movement if the movement exceeds the threshold.
-            if (movement.magnitude > minMovementThreshold)
+            // Only update rotation if there's significant input.
+            if (inputMovement.magnitude > minMovementThreshold)
             {
-                transform.up = movement;
+                transform.up = inputMovement;
             }
+            // Otherwise, do nothing so that the player maintains its current rotation.
         }
-
-        // Update lastPosition for the next frame.
-        lastPosition = transform.position;
     }
 }
