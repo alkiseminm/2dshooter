@@ -10,7 +10,7 @@ public class StaminaSystem : MonoBehaviour
     public float regenDelay = 1.5f;          // Time to wait before stamina starts regenerating
 
     // Internal timer to track how long since sprinting stopped.
-    private float regenTimer = 0f;
+    [SerializeField] private float regenTimer = 0f;
 
     // Reference to the PlayerController script.
     private PlayerController playerController;

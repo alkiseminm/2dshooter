@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &80309950
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 80309951}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &80309951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80309950}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 735671545}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,6 +419,7 @@ GameObject:
   - component: {fileID: 735671548}
   - component: {fileID: 735671549}
   - component: {fileID: 735671551}
+  - component: {fileID: 735671552}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -431,11 +463,12 @@ Transform:
   m_GameObject: {fileID: 735671543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.81, y: 2.11, z: -2.2445395}
+  m_LocalPosition: {x: -6.81, y: 2.11, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 907488859}
+  - {fileID: 80309951}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &735671546
@@ -485,6 +518,7 @@ MonoBehaviour:
   staminaDrainRate: 20
   staminaRegenRate: 20
   regenDelay: 1.5
+  regenTimer: 0
 --- !u!114 &735671549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +583,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyDamage: 10
   knockbackForce: 30
+--- !u!114 &735671552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735671543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44028f36aa31fc94da60267b828533f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 5423948309867802772, guid: 26b54c1e8b8679a4d88a20b12792e8ce, type: 3}
+  firePoint: {fileID: 80309951}
+  fireRate: 0.2
 --- !u!1 &907488858
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +696,7 @@ GameObject:
   - component: {fileID: 910512130}
   - component: {fileID: 910512131}
   m_Layer: 0
-  m_Name: enemySprite
+  m_Name: EnemySprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -662,7 +711,7 @@ Transform:
   m_GameObject: {fileID: 910512129}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -734,6 +783,7 @@ GameObject:
   - component: {fileID: 1946638328}
   - component: {fileID: 1946638327}
   - component: {fileID: 1946638329}
+  - component: {fileID: 1946638330}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -786,7 +836,7 @@ Transform:
   m_GameObject: {fileID: 1946638326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5215263, y: 0.1433528, z: -6.6639266}
+  m_LocalPosition: {x: 3.5215263, y: 0.1433528, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -806,6 +856,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+--- !u!114 &1946638330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1946638326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21aaffb8e678ce24fb3b90ffb0117f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
