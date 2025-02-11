@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.linearVelocity = transform.up * speed; // Moves forward based on rotation
-        Destroy(gameObject, lifeTime); // Prevents infinite bullets
+        Destroy(gameObject, lifeTime);
     }
 
     void OnTriggerEnter2D(Collider2D other)
