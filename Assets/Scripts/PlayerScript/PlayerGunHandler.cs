@@ -3,19 +3,24 @@ using UnityEngine;
 public class PlayerWeaponHandler : MonoBehaviour
 {
     [Header("Weapon Prefabs")]
-    public GameObject riflePrefab;   // Assign your rifle prefab in the Inspector
-    public GameObject shotgunPrefab; // Assign your shotgun prefab in the Inspector
+    public GameObject riflePrefab;    // Assign your rifle prefab in the Inspector
+    public GameObject shotgunPrefab;  // Assign your shotgun prefab in the Inspector
+    public GameObject sniperPrefab;   // Assign your sniper prefab in the Inspector
 
     [Header("Weapon Positioning")]
-    // Position and rotation for the rifle relative to the player
+    // Rifle positioning
     public Vector3 rifleLocalPosition = new Vector3(0.5f, 0f, 0f);
     public Vector3 rifleLocalRotationEuler = Vector3.zero;
 
-    // Position and rotation for the shotgun relative to the player
+    // Shotgun positioning
     public Vector3 shotgunLocalPosition = new Vector3(0.5f, 0f, 0f);
     public Vector3 shotgunLocalRotationEuler = Vector3.zero;
 
-    // Reference to the currently equipped weapon (either rifle or shotgun)
+    // Sniper positioning
+    public Vector3 sniperLocalPosition = new Vector3(0.5f, 0f, 0f);
+    public Vector3 sniperLocalRotationEuler = Vector3.zero;
+
+    // Reference to the currently equipped weapon (rifle, shotgun, or sniper)
     private GameObject currentWeapon;
 
     private PlayerShooting playerShooting;
@@ -28,15 +33,20 @@ public class PlayerWeaponHandler : MonoBehaviour
 
     void Update()
     {
-        // When the "1" key is pressed, equip the rifle.
+        // Press "1" to equip the rifle.
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             EquipRifle();
         }
-        // When the "2" key is pressed, equip the shotgun.
+        // Press "2" to equip the shotgun.
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             EquipShotgun();
+        }
+        // Press "3" to equip the sniper rifle.
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            EquipSniper();
         }
     }
 
@@ -46,7 +56,6 @@ public class PlayerWeaponHandler : MonoBehaviour
     /// </summary>
     void EquipRifle()
     {
-        // Remove any weapon currently equipped.
         if (currentWeapon != null)
         {
             Destroy(currentWeapon);
@@ -54,16 +63,13 @@ public class PlayerWeaponHandler : MonoBehaviour
 
         if (riflePrefab != null)
         {
-            // Instantiate the rifle as a child of the player.
             currentWeapon = Instantiate(riflePrefab, transform);
             currentWeapon.transform.localPosition = rifleLocalPosition;
             currentWeapon.transform.localRotation = Quaternion.Euler(rifleLocalRotationEuler);
 
-            // Get the rifle's shooting script (assumed to be ThreeRoundBurstRifle)
             ThreeRoundBurstRifle rifleScript = currentWeapon.GetComponent<ThreeRoundBurstRifle>();
             if (rifleScript != null)
             {
-                // Assign the rifle's shooting script to the player's shooting component.
                 playerShooting.equippedGun = rifleScript;
             }
             else
@@ -83,7 +89,6 @@ public class PlayerWeaponHandler : MonoBehaviour
     /// </summary>
     void EquipShotgun()
     {
-        // Remove any weapon currently equipped.
         if (currentWeapon != null)
         {
             Destroy(currentWeapon);
@@ -91,16 +96,13 @@ public class PlayerWeaponHandler : MonoBehaviour
 
         if (shotgunPrefab != null)
         {
-            // Instantiate the shotgun as a child of the player.
             currentWeapon = Instantiate(shotgunPrefab, transform);
             currentWeapon.transform.localPosition = shotgunLocalPosition;
             currentWeapon.transform.localRotation = Quaternion.Euler(shotgunLocalRotationEuler);
 
-            // Get the shotgun's shooting script (assumed to be Shotgun)
             Shotgun shotgunScript = currentWeapon.GetComponent<Shotgun>();
             if (shotgunScript != null)
             {
-                // Assign the shotgun's shooting script to the player's shooting component.
                 playerShooting.equippedGun = shotgunScript;
             }
             else
@@ -111,6 +113,39 @@ public class PlayerWeaponHandler : MonoBehaviour
         else
         {
             Debug.LogError("No shotgun prefab assigned in PlayerWeaponHandler!");
+        }
+    }
+
+    /// <summary>
+    /// Equips the sniper rifle: destroys any currently equipped weapon, instantiates the sniper,
+    /// sets its local position/rotation, and assigns its shooting script to the PlayerShooting component.
+    /// </summary>
+    void EquipSniper()
+    {
+        if (currentWeapon != null)
+        {
+            Destroy(currentWeapon);
+        }
+
+        if (sniperPrefab != null)
+        {
+            currentWeapon = Instantiate(sniperPrefab, transform);
+            currentWeapon.transform.localPosition = sniperLocalPosition;
+            currentWeapon.transform.localRotation = Quaternion.Euler(sniperLocalRotationEuler);
+
+            SniperRifle sniperScript = currentWeapon.GetComponent<SniperRifle>();
+            if (sniperScript != null)
+            {
+                playerShooting.equippedGun = sniperScript;
+            }
+            else
+            {
+                Debug.LogError("The instantiated sniper does not have a SniperRifle script attached!");
+            }
+        }
+        else
+        {
+            Debug.LogError("No sniper prefab assigned in PlayerWeaponHandler!");
         }
     }
 }
