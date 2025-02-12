@@ -583,7 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyDamage: 10
-  knockbackForce: 30
+  knockbackForce: 12
 --- !u!114 &735671552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -596,7 +596,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44028f36aa31fc94da60267b828533f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.6
   equippedGun: {fileID: 0}
 --- !u!114 &735671553
 MonoBehaviour:
@@ -611,8 +610,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riflePrefab: {fileID: 5467265101513131659, guid: 6c3eba9dbabe03c40a2eed8461ccbbed, type: 3}
+  shotgunPrefab: {fileID: 8165372047461429492, guid: df37787701e716449819b35bd9f4618f, type: 3}
   rifleLocalPosition: {x: 0, y: 1.1, z: 0}
   rifleLocalRotationEuler: {x: 0, y: 0, z: 0}
+  shotgunLocalPosition: {x: 0, y: 1.1, z: 0}
+  shotgunLocalRotationEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &907488858
 GameObject:
   m_ObjectHideFlags: 0

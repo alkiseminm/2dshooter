@@ -2,28 +2,28 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    [Header("Shooting Settings")]
-    public float fireRate = 0.2f;  // Time delay between trigger pulls (in seconds)
-
-    // Reference to the equipped gun's script (e.g., your ThreeRoundBurstRifle)
-    public ThreeRoundBurstRifle equippedGun;
-
-    private float nextFireTime = 0f;  // Tracks when the player can fire next
+    // Reference to the equipped weapon's script.
+    // Ensure that whichever weapon is equipped implements IWeapon.
+    public MonoBehaviour equippedGun; // Alternatively, use "public IWeapon equippedGun;" if you prefer.
 
     void Update()
     {
-        // When the left mouse button is held down and enough time has passed...
-        if (Input.GetMouseButton(0) && Time.time >= nextFireTime)
+        if (Input.GetMouseButton(0))
         {
-            // Calculate the shooting direction based on the mouse position.
-            // You can also use transform.up if your RotateToMouse script is handling aiming.
+            // Calculate the shooting direction. You could use the mouse position or transform.up if already rotated.
             Vector2 shootDirection = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
 
-            // Fire the equipped gun using its own Shoot() method.
             if (equippedGun != null)
             {
-                equippedGun.Shoot(shootDirection);
-                nextFireTime = Time.time + fireRate;
+                IWeapon weapon = equippedGun as IWeapon;
+                if (weapon != null)
+                {
+                    weapon.Shoot(shootDirection);
+                }
+                else
+                {
+                    Debug.LogWarning("The equipped gun does not implement IWeapon!");
+                }
             }
             else
             {
