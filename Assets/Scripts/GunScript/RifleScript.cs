@@ -5,7 +5,7 @@ public class ThreeRoundBurstRifle : MonoBehaviour, IWeapon
 {
     [Header("Bullet Settings")]
     public GameObject bulletPrefab;
-    public float bulletSpeed = 10f;
+    public float bulletSpeed = 10f;  // Now adjustable in the editor
 
     [Header("Burst Settings")]
     public float burstDelay = 0.1f;
@@ -35,13 +35,17 @@ public class ThreeRoundBurstRifle : MonoBehaviour, IWeapon
 
         for (int i = 0; i < bulletsPerBurst; i++)
         {
+            // Instantiate the bullet at the firePoint's position using its rotation.
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            // Optionally set the bullet's velocity if needed:
-            // Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            // if (rb != null)
-            // {
-            //     rb.velocity = direction * bulletSpeed;
-            // }
+
+            // Retrieve the Bullet component and set its speed using the rifle's bulletSpeed.
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            if (bulletScript != null)
+            {
+                bulletScript.speed = bulletSpeed;
+            }
+
+            // Wait for the burst delay between shots, except after the last bullet.
             if (i < bulletsPerBurst - 1)
             {
                 yield return new WaitForSeconds(burstDelay);

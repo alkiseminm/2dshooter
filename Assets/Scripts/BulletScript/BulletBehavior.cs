@@ -2,16 +2,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 10f;  // This will now be overwritten by the rifle's bulletSpeed.
     public int damage = 10;
-    public float lifeTime = 2f; // Bullet destroys itself after X seconds
+    public float lifeTime = 2f;
 
     private Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.linearVelocity = transform.up * speed; // Moves forward based on rotation
+        // Use the bullet's speed (which is now set by the rifle) for movement.
+        rb.linearVelocity = transform.up * speed;
         Destroy(gameObject, lifeTime);
     }
 
@@ -20,7 +21,7 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             other.GetComponent<EnemyHealth>()?.TakeDamage(damage);
-            Destroy(gameObject); // Bullet disappears on hit
+            Destroy(gameObject);
         }
     }
 }
