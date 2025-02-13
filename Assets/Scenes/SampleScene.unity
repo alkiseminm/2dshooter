@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000019c17db729645724
+  m_ApplyToSortingLayers: 0000000019c17db72964572405bede8f1b8601d07d89dc78
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -611,10 +611,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   riflePrefab: {fileID: 5467265101513131659, guid: 6c3eba9dbabe03c40a2eed8461ccbbed, type: 3}
   shotgunPrefab: {fileID: 8165372047461429492, guid: df37787701e716449819b35bd9f4618f, type: 3}
+  sniperPrefab: {fileID: 3616729493330105714, guid: 849efd1ee69429c4d8cf2dd718fed314, type: 3}
   rifleLocalPosition: {x: 0, y: 1.1, z: 0}
   rifleLocalRotationEuler: {x: 0, y: 0, z: 0}
   shotgunLocalPosition: {x: 0, y: 1.1, z: 0}
   shotgunLocalRotationEuler: {x: 0, y: 0, z: 0}
+  sniperLocalPosition: {x: 0, y: 1.1, z: 0}
+  sniperLocalRotationEuler: {x: 0, y: 0, z: 0}
 --- !u!1 &907488858
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,8 +691,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -805206501
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -7896281735413620878, guid: 769af7688008434478e55a97d8aac1c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -702,7 +705,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &8901340960571075643
+--- !u!1001 &1613072389
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -716,11 +719,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4708051440306532146, guid: 100d68fbc6f2177439f87f98973e5eae, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5215263
+      value: 4.63184
       objectReference: {fileID: 0}
     - target: {fileID: 4708051440306532146, guid: 100d68fbc6f2177439f87f98973e5eae, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1433528
+      value: -0.40653825
       objectReference: {fileID: 0}
     - target: {fileID: 4708051440306532146, guid: 100d68fbc6f2177439f87f98973e5eae, type: 3}
       propertyPath: m_LocalPosition.z
@@ -754,10 +757,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6229385444554533436, guid: 100d68fbc6f2177439f87f98973e5eae, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -770,4 +769,4 @@ SceneRoots:
   - {fileID: 582447153}
   - {fileID: 619394802}
   - {fileID: 735671545}
-  - {fileID: 8901340960571075643}
+  - {fileID: 1613072389}

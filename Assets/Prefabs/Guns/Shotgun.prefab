@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 609707049
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -8284906191417680433, guid: dc341e14c2b28a043a31406c99ebc205, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -168,7 +168,7 @@ MonoBehaviour:
   pelletSpeed: 25
   totalPellets: 7
   fixedAngleOffset: 3
-  randomAngleMax: 7
+  randomAngleMax: 6
   pelletDelay: 0
   fireRate: 1
   firePoint: {fileID: 1341546008635872057}

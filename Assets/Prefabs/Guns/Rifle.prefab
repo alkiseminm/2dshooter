@@ -81,7 +81,7 @@ MonoBehaviour:
   bulletSpeed: 30
   burstDelay: 0.1
   bulletsPerBurst: 3
-  fireRate: 0.6
+  fireRate: 0.7
   firePoint: {fileID: 7522607312352795662}
 --- !u!1 &5982449157903918642
 GameObject:
@@ -157,7 +157,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 609707049
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 638241832442570238, guid: 8ee99d18aa356074cbbbf797ee1d050a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -15,7 +15,6 @@ public class SniperRifle : MonoBehaviour, IWeapon
     public Transform firePoint;       // The transform from where the hitscan is cast
 
     [Header("Effects")]
-    public GameObject impactEffect;   // Optional: Impact effect prefab when a hit is detected
     public LineRenderer lineRenderer; // Optional: A LineRenderer to simulate a tracer
 
     /// <summary>
@@ -51,12 +50,6 @@ public class SniperRifle : MonoBehaviour, IWeapon
             {
                 enemy.TakeDamage((int)damage);
             }
-
-            // Instantiate an impact effect at the hit point if one is provided.
-            if (impactEffect != null)
-            {
-                Instantiate(impactEffect, hitInfo.point, Quaternion.identity);
-            }
         }
 
         // Optional: Draw a tracer using a LineRenderer.
@@ -67,7 +60,7 @@ public class SniperRifle : MonoBehaviour, IWeapon
     }
 
     /// <summary>
-    /// Temporarily enables the line renderer to simulate a tracer effect.
+    /// Temporarily enables the LineRenderer to simulate a tracer effect.
     /// </summary>
     /// <param name="endPoint">The end position for the tracer line.</param>
     /// <returns></returns>
@@ -85,10 +78,9 @@ public class SniperRifle : MonoBehaviour, IWeapon
         lineRenderer.enabled = true;
 
         // Keep the tracer visible for a short duration.
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.02f);
 
         // Disable the tracer.
         lineRenderer.enabled = false;
     }
-
 }
