@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StaminaSystem : MonoBehaviour
+public class PlayerStamina : MonoBehaviour
 {
     [Header("Stamina Settings")]
     public float maxStamina = 100f;          // Maximum stamina value
@@ -13,12 +13,12 @@ public class StaminaSystem : MonoBehaviour
     [SerializeField] private float regenTimer = 0f;
 
     // Reference to the PlayerController script.
-    private PlayerController playerController;
+    private PlayerMovement playerController;
 
     void Start()
     {
         // Assuming the PlayerController is attached to the same GameObject.
-        playerController = GetComponent<PlayerController>();
+        playerController = GetComponent<PlayerMovement>();
 
         if (playerController == null)
         {
@@ -34,7 +34,7 @@ public class StaminaSystem : MonoBehaviour
         if (playerController != null)
         {
             // Check if the player is sprinting.
-            if (playerController.currentState == PlayerController.PlayerState.Sprinting)
+            if (playerController.currentState == PlayerMovement.PlayerState.Sprinting)
             {
                 // Drain stamina over time.
                 currentStamina -= staminaDrainRate * Time.deltaTime;

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5116171509354969100}
   - component: {fileID: 3742010143928412710}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: BasicBot
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2027719037
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 297761703447499198, guid: 329b4457af9826841a197773e6753e17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

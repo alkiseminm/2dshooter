@@ -20,7 +20,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.GetComponent<EnemyHealth>()?.TakeDamage(damage);
+            other.GetComponent<BasicBotHealth>()?.TakeDamage(damage);
             Destroy(gameObject);
         }
     }

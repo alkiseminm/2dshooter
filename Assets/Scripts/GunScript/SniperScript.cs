@@ -45,7 +45,7 @@ public class SniperRifle : MonoBehaviour, IWeapon
             hitPosition = hitInfo.point;
 
             // Try to get the EnemyHealth component and apply damage if available.
-            EnemyHealth enemy = hitInfo.collider.GetComponent<EnemyHealth>();
+            BasicBotHealth enemy = hitInfo.collider.GetComponent<BasicBotHealth>();
             if (enemy != null)
             {
                 enemy.TakeDamage((int)damage);

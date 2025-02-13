@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RotateToMouse : MonoBehaviour
+public class PlayerRotate : MonoBehaviour
 {
     public enum RotationState { Aiming, NotAiming }
     public RotationState currentState;
@@ -9,12 +9,12 @@ public class RotateToMouse : MonoBehaviour
     public float minMovementThreshold = 0.01f;
 
     // Reference to the player's PlayerController to access the input movement.
-    private PlayerController playerController;
+    private PlayerMovement playerController;
 
     void Start()
     {
         currentState = RotationState.NotAiming;
-        playerController = GetComponent<PlayerController>();
+        playerController = GetComponent<PlayerMovement>();
         if (playerController == null)
         {
             Debug.LogError("PlayerController component not found on " + gameObject.name);

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public enum PlayerState { Standing, Walking, Sprinting }
     public PlayerState currentState;
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 movement; // Raw player input (doesn't include knockback)
 
     // Reference to the stamina system.
-    private StaminaSystem staminaSystem;
+    private PlayerStamina staminaSystem;
 
     [Header("Knockback Settings")]
     private Vector2 knockbackVelocity = Vector2.zero;
@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0;
         rb.freezeRotation = true;
 
-        staminaSystem = GetComponent<StaminaSystem>();
+        staminaSystem = GetComponent<PlayerStamina>();
         if (staminaSystem == null)
         {
             Debug.LogError("StaminaSystem component not found on the GameObject!");

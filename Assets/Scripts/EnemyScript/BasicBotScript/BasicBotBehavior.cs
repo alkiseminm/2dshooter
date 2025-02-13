@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyBehavior : MonoBehaviour
+public class BasicBotBehavior : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float moveSpeed = 1.0f;  // Movement speed of the enemy

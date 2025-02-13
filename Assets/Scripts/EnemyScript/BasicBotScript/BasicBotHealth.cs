@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class BasicBotHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     public int maxHealth = 50;

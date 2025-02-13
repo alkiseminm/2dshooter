@@ -6,7 +6,7 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private float knockbackForce = 10f;
 
     private PlayerDamageHandler playerDamageHandler; // Changed from PlayerHealth
-    private PlayerController playerController;
+    private PlayerMovement playerController;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class PlayerCollision : MonoBehaviour
             Debug.LogError("PlayerDamageHandler component not found on the player!");
         }
 
-        playerController = GetComponent<PlayerController>();
+        playerController = GetComponent<PlayerMovement>();
         if (playerController == null)
         {
             Debug.LogError("PlayerController component not found on the player!");
