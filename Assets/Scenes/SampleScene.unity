@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 0000000019c17db72964572405bede8f1b8601d07d89dc78
+  m_ApplyToSortingLayers: 0000000019c17db72964572405bede8f1b8601d07d89dc78d7604e68
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -421,6 +421,8 @@ GameObject:
   - component: {fileID: 735671551}
   - component: {fileID: 735671552}
   - component: {fileID: 735671553}
+  - component: {fileID: 735671554}
+  - component: {fileID: 735671555}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -464,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 735671543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.81, y: 2.11, z: 0}
+  m_LocalPosition: {x: -8.03, y: 2.06, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -618,6 +620,36 @@ MonoBehaviour:
   shotgunLocalRotationEuler: {x: 0, y: 0, z: 0}
   sniperLocalPosition: {x: 0, y: 1.1, z: 0}
   sniperLocalRotationEuler: {x: 0, y: 0, z: 0}
+--- !u!114 &735671554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735671543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e782f100a25099a4a9eb2a7ef4685e50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 735671549}
+--- !u!114 &735671555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735671543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2eeb351e4c8711242aa5f87b9d6309d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shieldPrefab: {fileID: 7722332049780607069, guid: 588c54f4e0419334a9e41dcaa4b0b888, type: 3}
+  maxDurability: 100
+  regenDelay: 3
+  regenRate: 5
+  currentDurability: 0
 --- !u!1 &907488858
 GameObject:
   m_ObjectHideFlags: 0
