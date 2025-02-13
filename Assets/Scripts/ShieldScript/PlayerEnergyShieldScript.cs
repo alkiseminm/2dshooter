@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerEnergyShieldScript : MonoBehaviour
 {
     [Header("Shield Prefab")]
-    public GameObject shieldPrefab;  // Assign your "Shield" prefab in the Inspector.
+    public GameObject shieldPrefab;  // Assign your "PlayerShield" prefab in the Inspector.
 
     private GameObject activeShield;
 
@@ -64,11 +64,18 @@ public class PlayerEnergyShieldScript : MonoBehaviour
         {
             currentDurability = maxDurability;
         }
+
+        // If the shield is disabled and we've regenerated above 0, reactivate it.
+        if (activeShield != null && !activeShield.activeSelf && currentDurability > 0)
+        {
+            activeShield.SetActive(true);
+            //Debug.Log("Shield re-enabled after regeneration.");
+        }
     }
 
     private void ShieldBreak()
     {
-        Debug.Log("Shield has broken!");
+        //Debug.Log("Shield has broken!");
         if (activeShield != null)
         {
             activeShield.SetActive(false);
