@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 5423948309867802772, guid: 26b54c1e8b8679a4d88a20b12792e8ce, type: 3}
   bulletSpeed: 30
-  burstDelay: 0.1
+  burstDelay: 0.065
   bulletsPerBurst: 3
   fireRate: 0.7
   firePoint: {fileID: 7522607312352795662}

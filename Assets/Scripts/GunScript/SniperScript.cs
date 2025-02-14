@@ -78,7 +78,7 @@ public class SniperRifle : MonoBehaviour, IWeapon
         lineRenderer.enabled = true;
 
         // Keep the tracer visible for a short duration.
-        yield return new WaitForSeconds(0.02f);
+        yield return new WaitForSeconds(0.1f);
 
         // Disable the tracer.
         lineRenderer.enabled = false;

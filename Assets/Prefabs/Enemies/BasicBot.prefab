@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 496670804977329994}
   - component: {fileID: 5116171509354969100}
   - component: {fileID: 3742010143928412710}
+  - component: {fileID: 9140793254587092333}
   m_Layer: 0
   m_Name: BasicBot
   m_TagString: Enemy
@@ -97,6 +98,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
+--- !u!114 &9140793254587092333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231596117136436588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fd78988380683448e7fbf56af627f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
 --- !u!1 &2004370514835930355
 GameObject:
   m_ObjectHideFlags: 0
