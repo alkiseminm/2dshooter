@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BasicBotDamage : MonoBehaviour
+public class BasicBotBump : MonoBehaviour, IBumpDamage
 {
     [SerializeField] private int damage = 10;
 

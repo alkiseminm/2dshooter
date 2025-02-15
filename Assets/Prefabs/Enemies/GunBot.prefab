@@ -101,6 +101,7 @@ GameObject:
   - component: {fileID: 4657230309393555467}
   - component: {fileID: 3497092485901889343}
   - component: {fileID: 2793340010612250267}
+  - component: {fileID: 1650392812394636844}
   m_Layer: 0
   m_Name: GunBot
   m_TagString: Enemy
@@ -200,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gunBotMoveSpeed: 1
-  gunBotStoppingDistance: 6
+  gunBotStoppingDistance: 5
   gunBotMoveDuration: 2
   moveDirection: {x: 0, y: 0}
   gunBotBulletPrefab: {fileID: 2158841402492722521, guid: fe0219736a4350c48be3a614d4aa31de, type: 3}
@@ -208,6 +209,19 @@ MonoBehaviour:
   gunBotBulletInterval: 0.3
   gunBotBulletsPerBurst: 5
   gunBotBurstCooldown: 2
+--- !u!114 &1650392812394636844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4929419104692285098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3210d6c7edd6294c9ae1c0acec1e58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!1 &5623327510900993179
 GameObject:
   m_ObjectHideFlags: 0

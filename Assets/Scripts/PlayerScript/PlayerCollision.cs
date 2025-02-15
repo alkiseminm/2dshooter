@@ -26,16 +26,15 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Get the enemy's damage amount from its EnemyDamage component.
-            BasicBotDamage enemyDamage = collision.gameObject.GetComponent<BasicBotDamage>();
-            if (enemyDamage != null)
+            IBumpDamage enemyBump = collision.gameObject.GetComponent<IBumpDamage>();
+            if (enemyBump != null)
             {
-                // Use the damage handler to process damage (checks shield first)
-                playerDamageHandler.TakeDamage(enemyDamage.Damage);
+                // Process bump damage
+                playerDamageHandler.TakeDamage(enemyBump.Damage);
             }
             else
             {
-                Debug.LogWarning("EnemyDamage component not found on enemy: " + collision.gameObject.name);
+                Debug.LogWarning("No enemy bump damage component found on enemy: " + collision.gameObject.name);
             }
 
             // Calculate knockback direction
