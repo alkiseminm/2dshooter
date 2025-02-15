@@ -20,7 +20,6 @@ public class SniperRifle : MonoBehaviour, IWeapon
     /// <summary>
     /// Fires the sniper rifle using a hitscan method.
     /// </summary>
-    /// <param name="direction">Not used directly since the firePoint's rotation defines the shooting direction.</param>
     public void Shoot(Vector2 direction)
     {
         if (Time.time < nextFireTime)
@@ -44,8 +43,8 @@ public class SniperRifle : MonoBehaviour, IWeapon
         {
             hitPosition = hitInfo.point;
 
-            // Try to get the EnemyHealth component and apply damage if available.
-            BasicBotHealth enemy = hitInfo.collider.GetComponent<BasicBotHealth>();
+            // Get any component implementing IDamageable and apply damage.
+            IDamageable enemy = hitInfo.collider.GetComponent<IDamageable>();
             if (enemy != null)
             {
                 enemy.TakeDamage((int)damage);
@@ -62,25 +61,14 @@ public class SniperRifle : MonoBehaviour, IWeapon
     /// <summary>
     /// Temporarily enables the LineRenderer to simulate a tracer effect.
     /// </summary>
-    /// <param name="endPoint">The end position for the tracer line.</param>
-    /// <returns></returns>
     private IEnumerator DrawShotEffect(Vector3 endPoint)
     {
-        // Set the start and end positions for the tracer.
         lineRenderer.SetPosition(0, firePoint.position);
         lineRenderer.SetPosition(1, endPoint);
-
-        // Set the tracer colors to yellow.
         lineRenderer.startColor = Color.yellow;
         lineRenderer.endColor = Color.yellow;
-
-        // Enable the LineRenderer to show the tracer.
         lineRenderer.enabled = true;
-
-        // Keep the tracer visible for a short duration.
         yield return new WaitForSeconds(0.1f);
-
-        // Disable the tracer.
         lineRenderer.enabled = false;
     }
 }

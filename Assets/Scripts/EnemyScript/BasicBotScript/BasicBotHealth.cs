@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BasicBotHealth : MonoBehaviour
+public class BasicBotHealth : MonoBehaviour, IDamageable
 {
     [Header("Health Settings")]
     public int maxHealth = 50;
@@ -17,7 +17,8 @@ public class BasicBotHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        //Debug.Log(gameObject.name + " took " + damage + " damage. HP: " + currentHealth);
+        // Uncomment to see debug info:
+        // Debug.Log(gameObject.name + " took " + damage + " damage. HP: " + currentHealth);
 
         if (currentHealth <= 0)
         {
@@ -26,11 +27,11 @@ public class BasicBotHealth : MonoBehaviour
     }
 
     /// <summary>
-    /// Handles enemy death (destroy object, play animation, etc.).
+    /// Handles enemy death.
     /// </summary>
     private void Die()
     {
-        //Debug.Log(gameObject.name + " has died.");
-        Destroy(gameObject); // Removes the enemy from the scene
+        // Optionally add death effects, animations, etc.
+        Destroy(gameObject);
     }
 }

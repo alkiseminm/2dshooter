@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f;  // This will now be overwritten by the rifle's bulletSpeed.
+    public float speed = 10f;  // Overwritten by the weapon's bulletSpeed.
     public int damage = 10;
     public float lifeTime = 2f;
 
@@ -11,16 +11,18 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        // Use the bullet's speed (which is now set by the rifle) for movement.
         rb.linearVelocity = transform.up * speed;
         Destroy(gameObject, lifeTime);
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        // Instead of checking just for a specific component,
+        // we check for any component that implements IDamageable.
+        IDamageable damageable = other.GetComponent<IDamageable>();
+        if (damageable != null)
         {
-            other.GetComponent<BasicBotHealth>()?.TakeDamage(damage);
+            damageable.TakeDamage(damage);
             Destroy(gameObject);
         }
     }
