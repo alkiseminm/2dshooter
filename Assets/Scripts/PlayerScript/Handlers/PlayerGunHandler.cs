@@ -6,6 +6,7 @@ public class PlayerWeaponHandler : MonoBehaviour
     public GameObject riflePrefab;    // Assign your rifle prefab in the Inspector
     public GameObject shotgunPrefab;  // Assign your shotgun prefab in the Inspector
     public GameObject sniperPrefab;   // Assign your sniper prefab in the Inspector
+    public GameObject chaingunPrefab; // Assign your chaingun prefab in the Inspector
 
     [Header("Weapon Positioning")]
     // Rifle positioning
@@ -20,7 +21,11 @@ public class PlayerWeaponHandler : MonoBehaviour
     public Vector3 sniperLocalPosition = new Vector3(0.5f, 0f, 0f);
     public Vector3 sniperLocalRotationEuler = Vector3.zero;
 
-    // Reference to the currently equipped weapon (rifle, shotgun, or sniper)
+    // Chaingun positioning
+    public Vector3 chaingunLocalPosition = new Vector3(0.5f, 0f, 0f);
+    public Vector3 chaingunLocalRotationEuler = Vector3.zero;
+
+    // Reference to the currently equipped weapon (rifle, shotgun, sniper, or chaingun)
     private GameObject currentWeapon;
 
     private PlayerShooting playerShooting;
@@ -47,6 +52,11 @@ public class PlayerWeaponHandler : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             EquipSniper();
+        }
+        // Press "4" to equip the chaingun.
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            EquipChaingun();
         }
     }
 
@@ -146,6 +156,39 @@ public class PlayerWeaponHandler : MonoBehaviour
         else
         {
             Debug.LogError("No sniper prefab assigned in PlayerWeaponHandler!");
+        }
+    }
+
+    /// <summary>
+    /// Equips the chaingun: destroys any currently equipped weapon, instantiates the chaingun,
+    /// sets its local position/rotation, and assigns its shooting script to the PlayerShooting component.
+    /// </summary>
+    void EquipChaingun()
+    {
+        if (currentWeapon != null)
+        {
+            Destroy(currentWeapon);
+        }
+
+        if (chaingunPrefab != null)
+        {
+            currentWeapon = Instantiate(chaingunPrefab, transform);
+            currentWeapon.transform.localPosition = chaingunLocalPosition;
+            currentWeapon.transform.localRotation = Quaternion.Euler(chaingunLocalRotationEuler);
+
+            Chaingun chaingunScript = currentWeapon.GetComponent<Chaingun>();
+            if (chaingunScript != null)
+            {
+                playerShooting.equippedGun = chaingunScript;
+            }
+            else
+            {
+                Debug.LogError("The instantiated chaingun does not have a Chaingun script attached!");
+            }
+        }
+        else
+        {
+            Debug.LogError("No chaingun prefab assigned in PlayerWeaponHandler!");
         }
     }
 }

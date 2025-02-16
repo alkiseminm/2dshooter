@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4708051440306532146}
+  - component: {fileID: 6419433880110140733}
   - component: {fileID: 496670804977329994}
   - component: {fileID: 5116171509354969100}
   - component: {fileID: 3742010143928412710}
@@ -36,6 +37,33 @@ Transform:
   - {fileID: 6229385444554533436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &6419433880110140733
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231596117136436588}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!58 &496670804977329994
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -185,7 +213,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2027719037
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 297761703447499198, guid: 329b4457af9826841a197773e6753e17, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
